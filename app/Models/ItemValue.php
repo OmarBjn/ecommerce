@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CartItem extends Model
+class ItemValue extends Model
 {
     use HasFactory;
 
-    public function cart()
-    {
-        return $this->belongsTo(Cart::class, 'cart_id');
-    }
+    protected $fillable = [
+        'attribute_value_id', 
+        'product_item_id'
+    ];
 
-    // public function product()
-    // {
-    //     return $this->belongsTo(Product::class);
-    // } not clear 
+    public function attributeValue()
+    {
+        return $this->belongsTo(AttributeValue::class, 'attribute_value_id');
+    }
 
     public function productItem()
     {

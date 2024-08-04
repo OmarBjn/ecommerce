@@ -9,9 +9,21 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function subCategory()
+    protected $fillable = [
+        'name',
+        'description', 
+        'brand_id', 
+        'category_id'
+    ];
+
+    public function category()
     {
-        return $this->belongsTo(SubCategory::class, 'sub_category_id');
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function productItems()
@@ -19,23 +31,18 @@ class Product extends Model
         return $this->hasMany(ProductItem::class);
     }
 
-    public function wishlists()
+    public function productImages()
     {
-        return $this->hasMany(Wishlist::class);
+        return $this->hasMany(ProductImage::class);
     }
 
-    public function images()
+    public function reviews()
     {
-        return $this->hasMany(Image::class, 'image_id');
+        return $this->hasMany(Review::class);
     }
 
-    // public function cartItems()
-    // {
-    //     return $this->hasMany(CartItem::class);
-    // }// need explination 
-
-    public function orderItems()
+    public function attributes()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(Attribute::class);
     }
 }

@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sub_categories', function (Blueprint $table) {
+        Schema::create('item_values', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-
-            $table->foreignId('category_id')
+            
+            $table->foreignId('attribute_value_id')
                   ->references('id')
-                  ->on('categories')
+                  ->on('attribute_values')
                   ->onDelete('cascade');
-                  
+
+            $table->foreignId('product_item_id')
+                  ->references('id')
+                  ->on('product_items')
+                  ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sub_categories');
+        Schema::dropIfExists('item_values');
     }
 };

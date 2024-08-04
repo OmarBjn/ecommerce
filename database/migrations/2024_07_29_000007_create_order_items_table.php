@@ -16,12 +16,7 @@ return new class extends Migration
 
             $table->foreignId('order_id')
                   ->references('id')
-                  ->on('order')
-                  ->onDelete('cascade');
-
-            $table->foreignId('product_id')
-                  ->references('id')
-                  ->on('products')
+                  ->on('orders')
                   ->onDelete('cascade');
 
             $table->foreignId('product_item_id')

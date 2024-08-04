@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wishlists', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             
             $table->foreignId('user_id')
@@ -19,10 +19,9 @@ return new class extends Migration
                   ->on('users')
                   ->onDelete('cascade');
 
-            $table->foreignId('product_id')
-                  ->references('id')
-                  ->on('products')
-                  ->onDelete('cascade');
+            $table->enum('status', ['cart', 'pending', 'canceled', 'completed']);
+
+            $table->decimal('total', 8, 2);
 
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wishlists');
+        Schema::dropIfExists('orders');
     }
 };

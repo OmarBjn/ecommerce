@@ -5,24 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductItem extends Model
+class AttributeValue extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'product_id', 
-        'price', 
-        'quantity'
+        'attribute_id', 
+        'value'
     ];
 
-    public function product()
+    public function attribute()
     {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
-
-    public function orderItems()
-    {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsTo(Attribute::class, 'attribute_id');
     }
 
     public function itemValues()

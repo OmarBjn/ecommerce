@@ -18,16 +18,6 @@ return new class extends Migration
                   ->references('id')
                   ->on('products')
                   ->onDelete('cascade');   
-                           
-            $table->foreignId('size_attribute_id')
-                  ->references('id')
-                  ->on('product_attributes')
-                  ->onDelete('cascade')->nullable();
-                  
-            $table->foreignId('color_attribute_id')
-                  ->references('id')
-                  ->on('product_attributes')
-                  ->onDelete('cascade')->nullable();
             
             $table->decimal('price', 8, 2);
             $table->integer('quantity');

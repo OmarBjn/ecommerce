@@ -13,8 +13,17 @@ return new class extends Migration
     {
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['color', 'size']);
-            $table->string('value');
+            
+            $table->foreignId('product_id')
+                  ->references('id')
+                  ->on('products')
+                  ->onDelete('cascade');
+
+            $table->foreignId('attribute_id')
+                  ->references('id')
+                  ->on('attributes')
+                  ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

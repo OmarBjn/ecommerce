@@ -9,8 +9,19 @@ class ProductAttribute extends Model
 {
     use HasFactory;
 
-    public function productItems()
+    protected $fillable = 
+    [
+        'product_id', 
+        'attribute_id',
+    ];
+
+    public function product()
     {
-        return $this->hasMany(ProductItem::class);
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class, 'attribute_id');
     }
 }
